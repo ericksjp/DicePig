@@ -45,7 +45,7 @@ function moveDice() {
   dice.classList.toggle('turn-left');
   dice.classList.toggle('turn-right');
   setTimeout(() => {
-    dice.setAttribute('src', `white-dice.png`);
+    dice.setAttribute('src', `./assets/white-dice.png`);
   }, 300);
 }
 
