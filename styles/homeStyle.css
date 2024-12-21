@@ -1,0 +1,250 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+
+:root {
+  --detail-color: #a9a9a9;
+  --text-color: #ececec;
+  --secondary-color: #2ecc71;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  font-weight: 400;
+  background-image: linear-gradient(to top left, #753682 0%, #bf2e34 100%);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.player-name {
+  display: flex;
+  gap: 2rem;
+  justify-content: start;
+  margin-left: 3rem;
+  align-items: center;
+}
+
+.player-name input {
+  font-size: 3rem !important;
+}
+
+h2 {
+  font-size: 3rem;
+  color: var(--text-color);
+}
+
+img {
+  width: 4rem;
+  height: 4rem;
+  filter: invert(100%) brightness(80%);
+  &:hover {
+    cursor: pointer;
+    filter: invert(100%) brightness(130%);
+  }
+}
+
+.player-name button {
+  width: fit-content;
+  height: fit-content;
+  border: none;
+  background-color: transparent;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  gap: 10rem;
+  align-self: center;
+  margin: 0 auto;
+  width: fit-content;
+  border-radius: 3rem;
+  padding: 4rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+hr {
+  opacity: 0.1;
+}
+
+p {
+  font-size: 2rem;
+  color: var(--text-color);
+}
+
+.main-btn {
+  font-size: 2rem;
+  appearance: none;
+  border: 0.2rem solid var(--detail-color);
+  background: transparent;
+  padding: 0.85em 1.5em;
+  color: var(--text-color);
+  border-radius: 2em;
+  transition: border 0.5s;
+  &:hover {
+    border-color: var(--secondary-color);
+    cursor: pointer;
+  }
+}
+
+.options-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.2);
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  border-radius: 2rem;
+  width: 30rem;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  border-radius: 1rem;
+}
+
+.id-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  gap: 2rem;
+}
+
+.id-option > button {
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+
+input {
+  font-size: 2rem;
+  appearance: none;
+  border: none;
+  outline: none;
+  border-bottom: 0.1em solid var(--detail-color);
+  text-align: center;
+  background-color: transparent;
+  border-radius: 0.2em 0.2em 0 0;
+  padding: 0.4em;
+  color: var(--text-color);
+  transition: border-bottom 0.5s;
+}
+
+input:focus {
+  border-bottom-color: var(--secondary-color);
+  cursor: pointer;
+}
+
+::placeholder {
+  color: var(--text-color);
+  opacity: 0.6;
+}
+
+::-ms-input-placeholder {
+  color: var(--text-color);
+}
+
+.game-form {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  flex-wrap: wrap;
+  max-width: 50rem;
+}
+
+.game-form div {
+  display: flex;
+  flex-direction: column;
+}
+
+.game-form input[type="number"] {
+  padding: 0.5em;
+  border: none;
+  border-bottom: 0.2rem solid var(--detail-color);
+  text-align: center;
+  color: var(--text-color);
+  appearance: textfield;
+  margin: 0;
+  &::-webkit-inner-spin-button {
+    opacity: 1;
+    background: red;
+  }
+}
+
+.game-form label {
+  font-size: 2rem;
+  color: var(--text-color);
+}
+
+.game-form select {
+  font-size: 2rem;
+  padding: 0.5em;
+  border: none;
+  border-bottom: 0.2rem solid var(--detail-color);
+  color: var(--text-color);
+  background-color: transparent;
+}
+
+option {
+  color: black;
+  background-color: var(--text-color);
+}
+
+.game-form .button-div {
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: right;
+}
+
+.button-div button {
+  width: 4rem;
+  height: 4rem;
+  background-color: transparent;
+  border: none;
+  border-radius: 2rem;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+#confirm-btn:hover {
+  background-color: var(--secondary-color);
+  opacity: 0.8;
+}
+
+#cancel-btn:hover {
+  background-color: #e74c3c;
+  opacity: 0.8;
+}
+
+.hidden {
+  display: none;
+}
