@@ -12,7 +12,7 @@ export function createGameSession(firstGame) {
   const session = { game: firstGame, wins: [], rematchVotes: [false, false] };
 
   gameSessions.set(id, session);
-  return session;
+  return {id, session};
 }
 
 export function getGameSession(id) {
