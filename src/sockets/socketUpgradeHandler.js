@@ -1,5 +1,6 @@
 import gameSocket from "./gameSocket.js";
 import { getGameSession } from "../services/gameSessionService.js";
+import { closeSocketWithErrorResponse } from "../utils/index.js";
 
 function parseSocketQueryParams(request) {
   const url = new URL(request.url, `ws://${request.headers.host}`);
@@ -8,11 +9,6 @@ function parseSocketQueryParams(request) {
     queryParams[key] = value;
   }
   return queryParams;
-}
-
-function closeSocketWithErrorResponse(socket, code, message) {
-  socket.write(`HTTP/1.1 ${code} ${message}\r\n\r\n`);
-  socket.destroy();
 }
 
 function handleGameUpgrade(request, socket, head) {
