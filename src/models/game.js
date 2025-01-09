@@ -47,6 +47,8 @@ export default class Game {
     });
 
     if (this.players.length === 2) this.status = "active";
+
+    return this.players.length - 1;
   }
 
   getPlayerIds() {
