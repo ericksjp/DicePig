@@ -8,7 +8,7 @@ export function closeSocketWithErrorResponse(socket, code, message) {
 }
 
 export function sendMessage(socket, type, object) {
-  if (socket && socket.readyState === WebSocket.OPEN) {
+  if (socket && socket.readyState === 1) {
     socket.send(
       JSON.stringify({
         type,

@@ -9,10 +9,10 @@ export function createGameSession(firstGame) {
   const id = generateId();
 
   // TODO Refactor this to a class
-  const session = { game: firstGame, wins: [], rematchVotes: [false, false] };
+  const session = { id, gameInstance: firstGame, wins: [], rematchVotes: [false, false] };
 
   gameSessions.set(id, session);
-  return {id, session};
+  return session;
 }
 
 export function getGameSession(id) {
@@ -26,12 +26,15 @@ export function hasGameSession(id) {
 export function updateGameSession(id) {
   const oldSession = gameSessions.get(id);
   if (!oldSession) return;
-  const { game } = oldSession;
-  if (game.status !== "finished") return;
+  const { gameInstance } = oldSession;
+  if (gameInstance.status !== "finished") return;
+  const winner = gameInstance.getWinnerPosition();
 
+  // the starting player will be the player that won the last game
   const newSession = {
-    game: new Game(game.targetScore, 0, game.getPlayerIds()),
-    wins: [oldSession.wins, ...game.getWinner()],
+    id,
+    gameInstance: new Game(gameInstance.targetScore, winner, gameInstance.getPlayersWs()),
+    wins: [...oldSession.wins, winner],
     rematchVotes: [false, false],
   };
 

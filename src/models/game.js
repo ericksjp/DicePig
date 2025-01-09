@@ -2,24 +2,24 @@ export default class Game {
   #winnerPosition;
   #currentTurn;
 
-  constructor(targetScore = 50, startingPlayer = 0, playerIds = [], id) {
+  constructor(targetScore = 50, startingPlayer = 0, playerSockets = [], id) {
     if (startingPlayer >= 2 || startingPlayer < 0) {
       throw new Error("Invalid starter position");
     }
     if (targetScore < 1) {
       throw new Error("Invalid target score");
     }
-    if (playerIds.length > 2) {
+    if (playerSockets.length > 2) {
       throw new Error("Invalid number of players");
     }
 
     this.targetScore = targetScore;
     this.#currentTurn = startingPlayer;
-    this.gameId = id;
+    this.id = id;
     this.#winnerPosition = null;
 
-    this.players = playerIds.map((id, i) => ({
-      id,
+    this.players = playerSockets.map((ws, i) => ({
+      ws,
       totalScore: 0,
       currentScore: 0,
       position: i,
@@ -36,11 +36,11 @@ export default class Game {
     return this.#currentTurn;
   }
 
-  addPlayer(id) {
+  addPlayer(ws) {
     if (this.players.length === 2) throw new Error("Cannot add more players: Game is full");
 
     this.players.push({
-      id,
+      ws,
       totalScore: 0,
       currentScore: 0,
       position: this.players.length,
@@ -51,12 +51,12 @@ export default class Game {
     return this.players.length - 1;
   }
 
-  getPlayerIds() {
-    return this.players.map((p) => p.id);
+  getPlayersWs() {
+    return this.players.map((p) => p.ws);
   }
 
-  findPlayerPositionById(playerId) {
-    return this.players.findIndex(player => player.id === playerId);
+  findPlayerPositionByWsInstance(ws) {
+    return this.players.findIndex(player => player.socket === ws);
   }
 
   roll(playerPosition) {
@@ -88,7 +88,7 @@ export default class Game {
 
     // if the player reaches the target score, the game is over
     if (player.totalScore >= this.targetScore) {
-      this.status = "over";
+      this.status = "finished";
       this.#winnerPosition = playerPosition;
     }
 
@@ -100,6 +100,7 @@ export default class Game {
     
     return {
       ...this.players[pos],
+      ws: undefined, // remove the socket from the state
       isTurn: pos === this.#currentTurn,
     };
   }
@@ -118,11 +119,11 @@ export default class Game {
   // function to verify if the player can make the move
   #validatePlayerAction(playerPosition) {
     if (this.status !== "active") {
-      throw new Error("Invalid action: The game is not active");
+      throw new Error("The game is not active");
     }
 
     if (playerPosition !== this.#currentTurn) {
-      throw new Error("Invalid action: Not this player's turn");
+      throw new Error("Not this player's turn");
     }
   }
 
