@@ -1,6 +1,11 @@
 import socket from "./socketService.js";
-import { changeButtonsState } from "./uiManager.js";
+import { changeButtonsState, handleRematchAnimation } from "./uiManager.js";
 import { holdBtn, quitBtn, rematchBtn, rollBtn } from "./tagUtils.js";
+import {
+  determineRematchAnimationDirection,
+  playerPosition,
+  rematchAnimDirection,
+} from "./gameState.js";
 
 rollBtn.addEventListener("click", function () {
   socket.send("roll");
@@ -12,6 +17,10 @@ holdBtn.addEventListener("click", function () {
 });
 
 rematchBtn.addEventListener("click", () => {
+  if (!rematchAnimDirection) {
+    determineRematchAnimationDirection(playerPosition);
+    handleRematchAnimation(rematchAnimDirection);
+  }
   socket.send("rematch");
   changeButtonsState(false, rematchBtn);
 });

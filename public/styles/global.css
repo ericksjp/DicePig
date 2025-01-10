@@ -76,3 +76,34 @@ body {
     clip-path: inset(0 -34% 0 0);
   }
 }
+
+/* frames to animations (use js to activate) */
+@keyframes rtc {
+  0% { background-position: left; }
+  100% { background-position: center; }
+}
+
+@keyframes ctl {
+  0% { background-position: center; }
+  100% { background-position: right; }
+}
+
+@keyframes ltc {
+  0% { background-position: right; }
+  100% { background-position: center; }
+}
+
+@keyframes ctr {
+  0% { background-position: center; }
+  100% { background-position: left; }
+}
+
+@keyframes ltr {
+  0% { background-position: right; }
+  100% { background-position: left; }
+}
+
+@keyframes rtl {
+  0% { background-position: left; }
+  100% { background-position: right; }
+}

@@ -1,5 +1,9 @@
 import {
+    determineRematchAnimationDirection,
   initializePositions,
+  opponentPosition,
+  rematchAnimDirection,
+  toggleRematchAnimationDirection,
   winHistoryc,
 } from "./gameState.js";
 import {
@@ -9,6 +13,7 @@ import {
   setInitialGameInfo,
   handleRematch,
   handleGameOver,
+  handleRematchAnimation,
 } from "./uiManager.js";
 
 let socket;
@@ -63,10 +68,12 @@ function handleSocketMessage(message) {
     }
 
     case "ask-rematch":
-      // TODO
+      determineRematchAnimationDirection(opponentPosition);
+      handleRematchAnimation(rematchAnimDirection);
       break;
 
     case "rematch":
+      handleRematchAnimation(toggleRematchAnimationDirection());
       handleRematch(message.gameState.currentTurn);
       break;
 

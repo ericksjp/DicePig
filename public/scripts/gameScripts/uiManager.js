@@ -13,6 +13,15 @@ import {
   waitText,
   gameScore,
 } from "./tagUtils.js";
+import { fillAnimateElement, removeFillAnimationProps } from "./utils.js";
+
+export function removeRematchAnimation() {
+  removeFillAnimationProps(rematchBtn);
+}
+
+export function handleRematchAnimation(dir) {
+  fillAnimateElement(rematchBtn, dir, 0.5, "#a1d99b", "rgba(255, 255, 255, 0.5)");
+}
 
 export function setDiceValue(value) {
   gameDice.setAttribute("src", `./assets/dice-${value}.png`);
@@ -118,6 +127,8 @@ export function handleRematch(activePlayerIndex) {
 
   moveDice(activePlayerIndex);
   activePlayerIndex === playerPosition && changeButtonsState(true, holdBtn, rollBtn);
+
+  setTimeout(() => { removeFillAnimationProps(rematchBtn) }, 500);
 }
 
 export function handleGameOver(winnerPosition, finalScore) {
