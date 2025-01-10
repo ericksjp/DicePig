@@ -1,7 +1,8 @@
 import { WebSocketServer } from "ws";
-import manageGameSession from "./gameSocket.js";
 import { getGameSession } from "../services/gameSessionService.js";
 import { closeSocketWithErrorResponse, parseSocketQueryParams } from "../utils/index.js";
+import manageGameSession from "./gameSocket.js";
+import manageQueue  from "./queueSocket.js";
 
 const wss = new WebSocketServer({ noServer: true, clientTracking: false });
 
@@ -11,18 +12,19 @@ function handleGameUpgrade(request, socket, head) {
 
   const gameSession = getGameSession(id);
   if (!gameSession) return closeSocketWithErrorResponse(socket, 404, "Game not found");
+  if (gameSession.gameInstance.status !== "waiting")
+    return closeSocketWithErrorResponse( socket, 403, "Game has already started");
 
-  // if an error occurs while adding the placeholder, close the socket with an error response
-  // otherwise, upgrade the connection and pass it to the game session manager
-  try {
-    const position = gameSession.gameInstance.addPlayer(0);
-    wss.handleUpgrade(request, socket, head, (ws) => {
-      manageGameSession(ws, position, gameSession);
-    });
-  } catch (error) {
-    console.error(error);
-    return closeSocketWithErrorResponse(socket, 403, error.message);
-  }
+  wss.handleUpgrade(request, socket, head, (ws) => {
+    const position = gameSession.gameInstance.addPlayer(ws);
+    manageGameSession(ws, position, gameSession);
+  })
+}
+
+function handleQueueUpgrade(request, socket, head) {
+  wss.handleUpgrade(request, socket, head, (ws) => {
+    manageQueue(ws);
+  });
 }
 
 export default function (server) {
@@ -33,6 +35,9 @@ export default function (server) {
     switch (pathname) {
       case "/game":
         handleGameUpgrade(request, socket, head);
+        break;
+      case "/queue":
+        handleQueueUpgrade(request, socket, head);
         break;
       default:
         closeSocketWithErrorResponse(socket, 404, "Not Found");

@@ -2,6 +2,7 @@ import { sendMessage, broadcastMessage } from "../utils/index.js";
 import { updateGameSession, removeGameSession } from "../services/gameSessionService.js";
 import WebSocket from "ws";
 import gameActions from "../actions/gameActions.js";
+import { removeGameFromQueue } from "../services/queueService.js";
 
 function handleRematchVote(playerPosition, gameSession) {
   const { gameInstance, rematchVotes } = gameSession;
@@ -43,10 +44,6 @@ function initializeGame(webSocket, playerPosition, gameSession) {
 
   const { gameInstance } = gameSession;
 
-  // replacing the placeholder for the webSokcet connection
-  // the connection is stored in the game instance to be used later
-  gameInstance.players[playerPosition].ws = webSocket;
-
   // if the player s the first to join, send a message to wait for the other player
   // and information about the game, so he can display it on the frontend
   // in a waiting interface
@@ -58,17 +55,20 @@ function initializeGame(webSocket, playerPosition, gameSession) {
     return;
   }
 
-  // if the player is the second to join, the game can start
-  broadcastMessage(gameInstance.getPlayersWs(), "active", {
-    gameId: gameSession.id,
-    gameState: gameInstance.gameState(),
-    yourPosition: playerPosition,
+  gameInstance.getPlayersWs().forEach((ws, i) => {
+    sendMessage(ws, "active", {
+      gameId: gameSession.id,
+      gameState: gameInstance.gameState(),
+      yourPosition: i,
+    });
   });
-}
+ }
 
 function terminateGame(playerPosition, { id, gameInstance }) {
   // if the game has already been removed from the map, there is no need to do anything
   if (!removeGameSession(id)) return;
+
+  if (gameInstance.status === "waiting") return removeGameFromQueue(id);
 
   // sending a message to the other player that the opponent has quit and closing the connection
   const opponentConnection = gameInstance.getPlayersWs()[1 - playerPosition];

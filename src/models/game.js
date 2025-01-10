@@ -2,7 +2,7 @@ export default class Game {
   #winnerPosition;
   #currentTurn;
 
-  constructor(targetScore = 50, startingPlayer = 0, playerSockets = [], id) {
+  constructor(targetScore = 50, startingPlayer = 0, playerSockets = [undefined, undefined]) {
     if (startingPlayer >= 2 || startingPlayer < 0) {
       throw new Error("Invalid starter position");
     }
@@ -15,17 +15,20 @@ export default class Game {
 
     this.targetScore = targetScore;
     this.#currentTurn = startingPlayer;
-    this.id = id;
     this.#winnerPosition = null;
 
-    this.players = playerSockets.map((ws, i) => ({
-      ws,
-      totalScore: 0,
-      currentScore: 0,
-      position: i,
-    }));
+    let count;
+    this.players = playerSockets.map((ws, i) => {
+      ws && count++;
+      return {
+        ws,
+        totalScore: 0,
+        currentScore: 0,
+        position: i,
+      }
+    })
 
-    this.status = this.players.length === 2 ? "active" : "waiting";
+    this.status = count === 2 ? "active" : "waiting";
   }
 
   getWinnerPosition() {
@@ -36,19 +39,15 @@ export default class Game {
     return this.#currentTurn;
   }
 
-  addPlayer(ws) {
-    if (this.players.length === 2) throw new Error("Cannot add more players: Game is full");
+  addPlayer(ws, position) {
+    position = position || this.players[0].ws ? 1 : 0;
+    if (position < 0 || position > 1) throw new Error("Invalid player position");
+    if (this.players[position].ws) throw new Error("Cannot add player at this position: Position is already taken");
 
-    this.players.push({
-      ws,
-      totalScore: 0,
-      currentScore: 0,
-      position: this.players.length,
-    });
+    this.players[position].ws = ws;
+    this.players[1 - position].ws && (this.status = "active");
 
-    if (this.players.length === 2) this.status = "active";
-
-    return this.players.length - 1;
+    return position;
   }
 
   getPlayersWs() {
