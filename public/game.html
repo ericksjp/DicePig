@@ -11,16 +11,16 @@
     <div id="game">
       <header>
         <h1 id="gameTitle">🎲 Pig Game</h1>
-        <h2 id="targetScore">Target Score:</h2>
-        <div class="score">
+        <h2 id="targetScore"></h2>
+        <div id="gameScore" class="hidden">
           <h3 id="player1wins" class="win__indicator">0</h3>
           <h3>X</h3>
-          <h3 id="plaer2wins" class="win__indicator">0</h3>
+          <h3 id="player2wins" class="win__indicator">0</h3>
         </div>
       </header>
 
       <div id="gameWaiter">
-        <p>Waiting for enemy</p>
+        <p id="waitText"></p>
         <div class="loader"></div>
       </div>
 
@@ -73,9 +73,9 @@
           </button>
           <button id="btnQuit" class="button">👋 Quit</button>
         </div>
-        <h2 id="gameId">Game Id: 3abba886-284f-4cd3-a076-968f556a7800</h2>
+        <h2 id="gameId"></h2>
       </footer>
     </div>
-    <script type="module" src="./scripts/gameScript.js"></script>
+    <script type="module" src="./scripts/gameScripts/app.js"></script>
   </body>
 </html>

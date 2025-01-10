@@ -68,7 +68,7 @@ main {
   font-weight: bold;
 }
 
-.score {
+#gameScore {
   display: flex;
   align-items: center;
   justify-content: space-evenly;

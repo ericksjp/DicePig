@@ -3,6 +3,7 @@
 import { Router } from "express";
 import { createGameSession, hasGameSession, removeGameSession } from "../services/gameSessionService.js";
 import Game from "../models/game.js";
+import { addGameToQueue } from "../services/queueService.js";
 
 const router = Router();
 

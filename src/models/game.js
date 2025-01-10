@@ -17,7 +17,7 @@ export default class Game {
     this.#currentTurn = startingPlayer;
     this.#winnerPosition = null;
 
-    let count;
+    let count = 0;
     this.players = playerSockets.map((ws, i) => {
       ws && count++;
       return {
