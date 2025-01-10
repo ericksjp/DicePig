@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pig Game</title>
+    <link href="./styles/homeStyle.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <main>
+        <section id="join-section">
+          <header>
+            <h2>Join Game</h2>
+          </header>
+          <div id="join-game-options">
+            <button type="button" class="button" id="search-game-btn">
+              Search for Game
+            </button>
+
+            <div id="join-game-byid">
+              <input
+                type="text"
+                id="game-id-input"
+                placeholder="Inform Game ID"
+              />
+              <button type="button" class="button" id="join-game-btn" disabled>
+                Join
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section id="create-section">
+          <header>
+            <h2>Create Game</h2>
+          </header>
+          <div id="create-game-options">
+            <div class="number-input-div">
+              <label for="numberInput">Target Score</label>
+              <input
+                class="number-input noselect"
+                id="target-score"
+                type="number"
+                name="numberInput"
+                min="1"
+                max="1000"
+                value="50"
+                placeholder="50"
+                required
+              />
+            </div>
+
+            <div class="number-input-div">
+              <label for="starterInput">Starter </label>
+              <input
+                class="number-input noselect"
+                id="starter"
+                type="number"
+                name="starterInput"
+                min="1"
+                max="2"
+                value="1"
+                placeholder="1"
+              />
+            </div>
+
+            <div class="privacy-option">
+              <button type="button" class="button privacy active" value="public">
+                Public
+              </button>
+              <button type="button" class="button privacy" value="private">
+                Private
+              </button>
+            </div>
+
+            <div class="button-div">
+              <button class="button" type="button" id="create-game-btn">
+                <img src="./assets/ok-svgrepo-com.svg" alt="" />
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="./scripts/homeScript.js"></script>
+  </body>
+</html>

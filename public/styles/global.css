@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+
+:root {
+  /* Neutral Colors */
+  --color-font-primary: #ececec;
+  --color-font-secondary: #333333;
+
+  --color-bg-main: linear-gradient(to top left, #753682 0%, #bf2e34 100%);
+  --color-bg-secondary: #c7365f;
+  --color-bg-secondary-darker: #872641;
+
+  --color-bg-card-hard: rgba(255, 255, 255, 0.5);
+  --color-bg-card-medium: rgba(255, 255, 255, 0.3);
+  --color-bg-card-soft: rgba(255, 255, 255, 0.1);
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  font-weight: normal;
+  line-height: 1.6;
+  min-height: 100vh;
+  color: var(--color-font-primary);
+  background: var(--color-bg-main);
+  background-attachment: fixed;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/*reusable*/
+.hidden {
+  display: none !important;
+}
+
+.disabled {
+  cursor: not-allowed !important;
+  opacity: 0.5;
+}
+
+.disabled:hover {
+  transform: none !important;;
+  background-color: var(--color-bg-card-hard) !important;;
+}
+
+.loader {
+  width: 60px;
+  aspect-ratio: 4;
+  background: radial-gradient(circle closest-side, #fff 90%, #0000) 0 /
+    calc(100% / 3) 100% space;
+  clip-path: inset(0 100% 0 0);
+  animation: l1 1s steps(4) infinite;
+}
+@keyframes l1 {
+  to {
+    clip-path: inset(0 -34% 0 0);
+  }
+}

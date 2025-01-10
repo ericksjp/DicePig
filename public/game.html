@@ -8,29 +8,74 @@
     <title>Pig Game</title>
   </head>
   <body>
-    <main>
-      <section class="player player--0 player--active player--winner name">
-        <h2 class="name" id="name--0">Player 1</h2>
-        <p class="score" id="score--0">0</p>
-        <div class="current">
-          <p class="current-label">Current</p>
-          <p class="current-score" id="current--0">0</p>
+    <div id="game">
+      <header>
+        <h1 id="gameTitle">🎲 Pig Game</h1>
+        <h2 id="targetScore">Target Score:</h2>
+        <div class="score">
+          <h3 id="player1wins" class="win__indicator">0</h3>
+          <h3>X</h3>
+          <h3 id="plaer2wins" class="win__indicator">0</h3>
         </div>
-      </section>
-      <section class="player player--1">
-        <h2 class="name" id="name--1">Player 2</h2>
-        <p class="score" id="score--1">0</p>
-        <div class="current">
-          <p class="current-label">Current</p>
-          <p class="current-score" id="current--1">0</p>
-        </div>
-      </section>
+      </header>
 
-      <img src="./assets/white-dice.png" alt="Playing dice" class="dice" />
-      <button class="btn btn--new disabled" disabled>🔄 New game</button>
-      <button class="btn btn--roll">🎲 Roll dice</button>
-      <button class="btn btn--hold">📥 Hold</button>
-    </main>
-    <script src="./scripts/gameScript.js"></script>
+      <div id="gameWaiter">
+        <p>Waiting for enemy</p>
+        <div class="loader"></div>
+      </div>
+
+      <main id="gameMain" class="hidden">
+        <section id="player1Section" class="player">
+          <p id="player1Indicator" class="player__indicator">Me</p>
+          <p id="player1ResultIndicator" class="result__indicator hidden"></p>
+          <div id="player1Loader" class="loader hidden"></div>
+          <h2 id="player1Name" class="player__name">Player 1</h2>
+          <p id="player1TotalScore" class="player__score">0</p>
+          <div id="player1Pot" class="player__pot">
+            <p class="current__label">Current</p>
+            <p id="player1CurrentScore" class="current__score">0</p>
+          </div>
+        </section>
+
+        <div class="game__controls">
+          <img src="./assets/dice-0.png" alt="Playing dice" id="gameDice" />
+          <div class="game__controls__div">
+            <button id="btnRoll" class="button disabled" disabled>
+              🎲 Roll
+            </button>
+            <button
+              id="btnHold"
+              class="button fill-bg-animation disabled"
+              disabled
+            >
+              📥 Hold
+            </button>
+          </div>
+        </div>
+
+        <section id="player2Section" class="player">
+          <p id="player2Indicator" class="player__indicator">Me</p>
+          <div id="player2Loader" class="loader hidden"></div>
+          <p id="player2ResultIndicator" class="result__indicator hidden"></p>
+          <h2 id="player2Name" class="player__name">Player 2</h2>
+          <p id="player2TotalScore" class="player__score">0</p>
+          <div id="player2Pot" class="player__pot">
+            <p class="current__label">Current</p>
+            <p id="player2CurrentScore" class="current__score">0</p>
+          </div>
+        </section>
+      </main>
+
+      <footer id="gameFooter" class="footer--hidden">
+        <div class="game__controls__div">
+          <button id="btnRematch" class="button disabled" disabled>
+            🔄 Rematch
+          </button>
+          <button id="btnQuit" class="button">👋 Quit</button>
+        </div>
+        <h2 id="gameId">Game Id: 3abba886-284f-4cd3-a076-968f556a7800</h2>
+      </footer>
+    </div>
+    <script type="module" src="./scripts/gameScript.js"></script>
   </body>
 </html>
