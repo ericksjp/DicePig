@@ -1,5 +1,5 @@
 import {
-    determineRematchAnimationDirection,
+  determineRematchAnimationDirection,
   initializePositions,
   opponentPosition,
   rematchAnimDirection,
@@ -19,11 +19,11 @@ import {
 let socket;
 
 if (localStorage.getItem("queue") === "true") {
-  socket = new WebSocket("ws://localhost/queue");
+  socket = new WebSocket("ws://localhost:80/queue");
 } else {
   const id = localStorage.getItem("game_id");
   if (!id) window.location.href = "index.html";
-  socket = new WebSocket(`ws://localhost/game?id=${id}`);
+  socket = new WebSocket(`ws://localhost:80/game?id=${id}`);
 }
 
 socket.onerror = (error) => {
@@ -44,7 +44,11 @@ socket.onopen = () => {
 function handleSocketMessage(message) {
   switch (message.type) {
     case "waiting":
-      setInitialGameInfo(message.gameId, message.targetScore, "Waiting for opponent");
+      setInitialGameInfo(
+        message.gameId,
+        message.targetScore,
+        "Waiting for opponent",
+      );
       break;
 
     case "active":
