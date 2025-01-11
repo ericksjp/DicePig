@@ -3,7 +3,7 @@ import { redirect } from "../helpers.js";
 export async function createGame(targetScore, startingPlayer, isPublic) {
   startingPlayer--;
   try {
-    const resp = await fetch("http://localhost:80/api/game/new", {
+    const resp = await fetch("https://dicepig.onrender.com/api/game/new", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,7 +25,7 @@ export async function createGame(targetScore, startingPlayer, isPublic) {
 
 export async function joinGame(gameId) {
   try {
-    const resp = await fetch(`http://localhost:80/api/game/join/${gameId}`, {
+    const resp = await fetch(`https://dicepig.onrender.com/api/game/join/${gameId}`, {
       method: "GET",
     });
     if (resp.status === 204) {

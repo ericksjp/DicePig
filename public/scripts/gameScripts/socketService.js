@@ -19,11 +19,11 @@ import {
 let socket;
 
 if (localStorage.getItem("queue") === "true") {
-  socket = new WebSocket("ws://localhost:80/queue");
+  socket = new WebSocket("https://dicepig.onrender.com/queue");
 } else {
   const id = localStorage.getItem("game_id");
   if (!id) window.location.href = "index.html";
-  socket = new WebSocket(`ws://localhost:80/game?id=${id}`);
+  socket = new WebSocket(`https://dicepig.onrender.com/game?id=${id}`);
 }
 
 socket.onerror = (error) => {
