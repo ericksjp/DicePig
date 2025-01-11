@@ -2,8 +2,12 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "src/server.js",
+  "engines": {
+    "node": "20.18.0"
+  },
   "scripts": {
-    "dev": "nodemon src/server.js"
+    "start": "sudo node src/server.js",
+    "dev": "sudo nodemon src/server.js"
   },
   "type": "module",
   "keywords": [],

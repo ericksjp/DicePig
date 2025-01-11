@@ -2,7 +2,7 @@ import { redirect } from "../helpers.js";
 let queuesocket = null;
 
 export function enterQueue() {
-  queuesocket = new WebSocket("ws://localhost:3000/queue");
+  queuesocket = new WebSocket("ws://localhost/queue");
   queuesocket.onopen = () => {
     console.log("connected to the queue server");
   };

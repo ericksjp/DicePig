@@ -3,7 +3,7 @@ import { redirect } from "../helpers.js";
 export async function createGame(targetScore, startingPlayer, isPublic) {
   startingPlayer--;
   try {
-    const resp = await axios.post("http://localhost:3000/game/new", {
+    const resp = await axios.post("http://localhost/api/game/new", {
       targetScore,
       startingPlayer,
       isPublic,
@@ -16,7 +16,7 @@ export async function createGame(targetScore, startingPlayer, isPublic) {
 
 export async function joinGame(gameId) {
   try {
-    const resp = await axios.get(`http://localhost:3000/game/join/${gameId}`);
+    const resp = await axios.get(`http://localhost/api/game/join/${gameId}`);
     resp.status === 204 && redirect(gameId);
   } catch (error) {
     console.error("error joining game:", error);

@@ -2,7 +2,7 @@ import http from "node:http";
 import app from "./app.js";
 import socketUpgradeHandler from "./sockets/socketUpgradeHandler.js";
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 80;
 const server = http.createServer(app);
 
 socketUpgradeHandler(server);

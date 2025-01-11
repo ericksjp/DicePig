@@ -19,11 +19,11 @@ import {
 let socket;
 
 if (localStorage.getItem("queue") === "true") {
-  socket = new WebSocket("ws://localhost:3000/queue");
+  socket = new WebSocket("ws://localhost/queue");
 } else {
   const id = localStorage.getItem("game_id");
   if (!id) window.location.href = "index.html";
-  socket = new WebSocket(`ws://localhost:3000/game?id=${id}`);
+  socket = new WebSocket(`ws://localhost/game?id=${id}`);
 }
 
 socket.onerror = (error) => {
