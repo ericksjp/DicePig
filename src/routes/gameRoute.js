@@ -42,7 +42,7 @@ router.post("/new", (req, res) => {
         isPublic && addGameToQueue(id);
       }
     }
-  }, 1000)
+  }, 1000 * 3)
 });
 
 router.get("/join/:id", (req, res) => {
